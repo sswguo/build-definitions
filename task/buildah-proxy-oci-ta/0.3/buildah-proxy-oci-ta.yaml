@@ -203,16 +203,8 @@ spec:
       default: 8080
     - name: ENABLE_HTTP_PROXY
       type: string
-      description: Enable the http proxy (true/false)
+      description: Enable the http proxy (true/false) to transfer the generic (non-maven & non-npm) requests to Indy.
       default: "false"
-    - name: HTTP_PROXY_CLIENT_ID
-      type: string
-      description: The client ID used by the http proxy to communicate with Indy.
-      default: ""
-    - name: HTTP_PROXY_CLIENT_CREDENTIAL
-      type: string
-      description: The client credential used by the http proxy to communicate with Indy.
-      default: ""
   results:
     - name: IMAGE_DIGEST
       description: Digest of the image just built
@@ -927,7 +919,5 @@ spec:
         fi
 
         if [ "$(params.ENABLE_HTTP_PROXY)" == "true" ]; then
-          export QUARKUS_OIDC_CLIENT_CLIENT_ID="$(params.HTTP_PROXY_CLIENT_ID)"
-          export QUARKUS_OIDC_CLIENT_CREDENTIALS_SECRET="$(params.HTTP_PROXY_CLIENT_CREDENTIAL)"
           /deployment/start-service.sh
         fi
